@@ -12,7 +12,8 @@ function updateSlide(isInstant = false) {
         ? 'none'
         : 'transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)';
 
-    slider.style.transform = `translateY(-${currentSlide * 100}vh)`;
+    // slider.style.transform = `translateY(-${currentSlide * 100}vh)`;
+    slider.style.transform = `translateY(-${currentSlide * 100}dvh)`;
 
     // Xử lý active + step
     slides.forEach((slide, index) => {
@@ -60,6 +61,18 @@ function goRight() {
         updateSlide();
     }
 }
+
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "f" || e.key === "F") {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+});
+
 
 // ← chỉ giảm step
 function goLeft() {

@@ -4,29 +4,34 @@
 }
 
 * {
-    margin: 0; padding: 0; box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: "Microsoft JhengHei", sans-serif;
 }
 
-body { overflow: hidden; background-color: #000; }
+body {
+    overflow: hidden;
+    background-color: #000;
+}
 
-/* Khung bọc Slider để trượt dọc */
+/* FIX 1: dùng dvh */
 .presentation-container {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .slide {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
-/* Slide 1: Tiêu đề */
+/* Slide title giữ nguyên */
 .slide-title {
     background-image: url('img/slide1.jpg');
     background-size: cover;
@@ -35,119 +40,133 @@ body { overflow: hidden; background-color: #000; }
     text-align: center;
 }
 
-/* Áp dụng cho tiêu đề chính (Slide 1) */
-/* Slide 1: Tiêu đề chính */
 .slide-title h1 {
     font-family: 'Ma Shan Zheng', cursive;
-    /* Tối thiểu 3rem, lý tưởng 10vw, tối đa 12rem */
     font-size: clamp(3rem, 10vw, 12rem); 
     color: var(--white);
     text-shadow: 3px 3px 20px rgba(0,0,0,0.8);
     opacity: 0; 
     transform: translateY(50px);
-    width: 90%; /* Đảm bảo không sát mép */
+    width: 90%;
 }
 
-/* Áp dụng cho câu khẩu hiệu dưới tiêu đề */
 .slide-title p {
     font-family: 'Dancing Script', cursive;
     font-size: clamp(1.5rem, 5vw, 6rem);
-    color: yellow; /* Chỉnh lại màu cho đồng bộ HTML của bạn */
+    color: yellow;
     font-style: italic;
 }
 
-/* Slide 2: Nội dung */
-.slide-content { background-color: #051a11; }
+/* Slide content */
+.slide-content {
+    background-color: #051a11;
+}
+
+/* FIX 2 + 3 */
 .slide-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Mặc định 2 cột cho laptop */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    padding: 0 5%;
+    padding: 5vh 5%;
     width: 100%;
-    max-height: 90vh; /* Giới hạn chiều cao để không bị tràn dọc */
     align-items: center;
 }
 
-/* Tiêu đề trong slide nội dung */
+/* Text */
 .text-box h2 { 
-    font-size: clamp(2rem, 5vw, 6.5rem);
+    font-size: clamp(1.8rem, 4vw, 5.5rem);
     color: var(--green-yellow);
 }
 
 .text-box p { 
     color: white;
-    font-size: clamp(1rem, 2vw, 2rem);
-    line-height: 1.4;
+    font-size: clamp(1rem, 2.2vw, 1.6rem);
+    line-height: 1.5;
 }
+
+
+/* IMAGE */
 .image-box {
     width: 100%;
-    max-width: 600px; /* Chặn lại không cho quá to trên màn hình siêu lớn */
-    height: auto;
-    aspect-ratio: 16/9; /* Giữ tỷ lệ ảnh cố định */
+    max-width: 100%; /* FIX: bỏ giới hạn 600px */
+    aspect-ratio: 16/9;
     margin: 0 auto;
 }
 
 .image-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Hoặc contain tùy bạn, nhưng cover sẽ lấp đầy khung đẹp hơn */
+    object-fit: cover;
     border-radius: 15px;
 }
-/* Kích hoạt Animation */
+
+/* Animation giữ nguyên */
 .slide.active h1, .slide.active p,
 .slide.active h2, .slide.active .image-box img {
-    opacity: 1; transform: translate(0) scale(1);
+    opacity: 1;
+    transform: translate(0) scale(1);
 }
 
-/* Nút bấm */
+/* Controls giữ nguyên */
 .controls {
-    position: fixed; bottom: 30px; right: 30px;
-    display: flex; flex-direction: column; gap: 10px; z-index: 100;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
 }
 
 .nav-btn {
-    padding: 15px; background: rgba(255,255,255,0.1);
-    color: white; border: 1px solid white; cursor: pointer; border-radius: 50%;
+    padding: 12px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+    border-radius: 50%;
 }
 
+/* ===== TEAM FINAL ===== */
 
-/* CSS cho bố cục trang cuối */
 .team-final {
-        background: beige;
+    background: beige;
     background-image: url('img/caotu.jpg'); 
     background-size: cover;
 }
 
+/* FIX: bỏ height cứng */
 .team-layout {
     display: flex;
     width: 90%;
-    height: 85%;
     align-items: center;
-    gap: 50px;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* 🔥 quan trọng */
 }
 
-/* Cột bên trái */
+/* LEFT COLUMN */
 .member-column {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    width: 300px;
+    gap: 20px;
+    min-width: 200px; /* thay vì width cố định */
 }
 
 .member-item {
-
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.member-item p{
-color: #000
+.member-item p {
+    color: #000;
 }
+
 .member-photo {
-   width: clamp(80px, 15vw, 180px); /* Tự co giãn từ 80px đến 180px */
-    height: clamp(80px, 15vw, 180px);
+    width: clamp(80px, 15vw, 150px);
+    height: clamp(80px, 15vw, 150px);
     border-radius: 50%;
     border: 4px solid var(--green-yellow);
     overflow: hidden;
@@ -163,157 +182,115 @@ color: #000
 
 .member-name {
     color: white;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
     margin-top: 10px;
     font-weight: bold;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
 }
 
-/* Phần nội dung bên phải */
+/* RIGHT CONTENT */
 .thanks-content {
-    flex-grow: 1;
+    flex: 1;
     display: flex;
     justify-content: center;
 }
 
-.team-final .glass-card {
-    padding: 60px;
-    width: 100%;
-}
-
-/* 設置頂部標題 */
+/* HEADER */
 .top-header {
     position: absolute;
-    top: 40px;
+    top: 20px;
     width: 100%;
     text-align: center;
     z-index: 10;
 }
 
-/* 佈局容器 */
+
+@media (max-width: 768px) {
+    .team-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .member-column {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .controls {
+        bottom: 10px;
+        right: 10px;
+    }
+}
+/* ===== TEAM LAYOUT ===== */
 .team-layout {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 95%;
-    height: 80%;
-    margin-top: 80px; /* 避開頂部標題 */
+    margin-top: 60px;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
-/* 右側直排文字樣式 */
+/* ===== VERTICAL TEXT ===== */
 .vertical-thanks {
-    writing-mode: vertical-rl; /* 關鍵：文字由上至下垂直排列 */
-    font-size: 4.5rem;
+    writing-mode: vertical-rl;
+    font-size: clamp(2rem, 4vw, 4.5rem);
     font-weight: bold;
-    color: white;
-    letter-spacing: 1.5rem;
+    color: red;
+    letter-spacing: 0.5rem;
     text-shadow: 3px 3px 15px rgba(0,0,0,0.7);
-    padding-right: 40px;
 }
 
-/* 中間視覺區域 */
+/* ===== CENTER VISUAL ===== */
 .center-visual {
-    flex-grow: 1;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .thank-you-center {
-    font-size: 6rem;
+    font-size: clamp(2.5rem, 6vw, 6rem);
     color: white;
-    margin-top: -50px; /* 讓文字與圖稍微重疊更有設計感 */
+    margin-top: -30px;
     text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
 }
 
-/* 左側成員頭像美化 */
+/* ===== MEMBER PHOTO ===== */
 .member-photo {
-    width: 200px;
-    height: 200px;
+    width: clamp(80px, 15vw, 150px);
+    height: clamp(80px, 15vw, 150px);
     border-radius: 50%;
     border: 3px solid #ccff00;
     box-shadow: 0 0 15px rgba(204, 255, 0, 0.4);
+    overflow: hidden;
     margin-bottom: 5px;
 }
 
-.vertical-thanks{
-    font-size: clamp(2rem, 4vw, 4.5rem);
-    letter-spacing: 0.5rem;
-    color: red;
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* 9. Responsive cho điện thoại */
-/* ================= RESPONSIVE SYSTEM ================= */
-
-/* 1. Dành cho Laptop nhỏ và Tablet (Ngang) */
-@media (max-width: 1024px) {
-    .slide-grid {
-        grid-template-columns: 1fr; /* Chuyển từ 2 cột về 1 cột dọc */
-        grid-template-rows: auto auto; /* Tự động chia hàng cho chữ và ảnh */
-        gap: 15px;
-        padding: 5vh 5%;
-        align-content: center; /* Căn giữa nội dung theo chiều dọc slide */
-    }
-
-    .text-box {
-        text-align: center;
-        padding-bottom: 10px;
-    }
-
-    .text-box h2 {
-        font-size: clamp(2.5rem, 6vw, 4rem); /* Tự co giãn tiêu đề */
-        margin-bottom: 10px;
-    }
-
-    .text-box p {
-        font-size: clamp(1.1rem, 2.5vw, 1.5rem); /* Tự co giãn nội dung */
-        max-width: 90%;
-        margin: 0 auto;
-    }
-
-    .image-column {
-        flex-direction: row; /* Xếp 2 ảnh nằm ngang nhau thay vì chồng dọc */
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .image-box {
-        flex: 1; /* Chia đều không gian cho 2 ảnh */
-        height: 35vh; /* Giới hạn chiều cao để không đẩy chữ ra khỏi màn hình */
-        max-width: 45%;
-    }
-
-    .image-box img {
-        object-fit: cover; /* Cắt ảnh vừa khung để không bị méo */
-    }
+/* ===== IMAGE COLUMN ===== */
+.image-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
 }
 
-/* 2. Dành cho điện thoại hoặc màn hình siêu nhỏ (Dọc) */
-@media (max-width: 480px) {
-    .image-column {
-        flex-direction: column; /* Điện thoại bé quá thì lại xếp ảnh chồng lên nhau */
-    }
-    
-    .image-box {
-        max-width: 100%;
-        height: 20vh; /* Giảm chiều cao ảnh hơn nữa */
-    }
-
-    .slide-title h1 {
-        font-size: 3.5rem;
-    }
-
-    .vertical-thanks {
-        writing-mode: horizontal-tb; /* Chuyển chữ "Cảm ơn" từ dọc thành ngang */
-        font-size: 2.5rem;
-        padding-right: 0;
-    }
+.image-column .image-box {
+    width: 100%;
+    aspect-ratio: 16/9;
 }
-/* Hiệu ứng hiện dần và trượt lên cho tiêu đề */
+
+/* ===== ANIMATION ===== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -327,68 +304,29 @@ color: #000
     }
 }
 
-/* Hiệu ứng rơi từng chữ (nếu bạn chia nhỏ chữ ra) */
-@keyframes letterDrop {
-    0% {
-        transform: translateY(-500px);
-        opacity: 0;
-    }
-    60% {
-        transform: translateY(30px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(0);
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Áp dụng vào các phần tử khi slide có class .active */
 .slide.active h1 {
     animation: fadeInUp 1.5s ease-out forwards;
 }
 
 .slide.active p {
-    animation: fadeInUp 1.5s ease-out 0.3s forwards; /* Chậm hơn 0.3s để tạo nhịp điệu */
+    animation: fadeInUp 1.5s ease-out 0.3s forwards;
 }
 
 .slide.active .content-box {
     animation: fadeIn 2s ease-in forwards;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Trạng thái ẩn của các phần tử có trình tự */
-.dynamic-item {
-    opacity: 0;
-    transform: translateY(30px); /* Trượt nhẹ từ dưới lên */
-    transition: all 0.8s ease-out;
-}
-
-
-
-.image-column{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    width:100%;
-}
-
-.image-column .image-box{
-    height:450px;
-}
-/* ================= STEP SYSTEM ================= */
-
-/* Ẩn mặc định tất cả item có step */
+/* ===== STEP SYSTEM ===== */
 .dynamic-item {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.6s ease;
 }
-
-/* ===== HIỆN THEO STEP ===== */
 
 /* Step 1 */
 .slide.show-step-1 .step-1 {
@@ -420,7 +358,7 @@ color: #000
     transform: translateY(0);
 }
 
-/* Step 5 (nếu cần thêm thì copy tiếp pattern) */
+/* Step 5 */
 .slide.show-step-5 .step-1,
 .slide.show-step-5 .step-2,
 .slide.show-step-5 .step-3,
@@ -428,4 +366,81 @@ color: #000
 .slide.show-step-5 .step-5 {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+    .slide-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 5vh 5%;
+    }
+
+    .image-column {
+        flex-direction: row;
+    }
+
+    .image-box {
+        flex: 1;
+        aspect-ratio: 16/9;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+    .image-column {
+        flex-direction: column;
+    }
+
+    .image-box {
+        width: 100%;
+    }
+
+    .slide-title h1 {
+        font-size: 2.5rem;
+    }
+
+    .vertical-thanks {
+        writing-mode: horizontal-tb;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .team-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+
+
+/* ===== PROJECTOR MODE ===== */
+
+/* Ẩn nút khi màn lớn (trình chiếu) */
+@media (min-width: 1024px) {
+    .controls {
+        display: none;
+    }
+}
+
+/* Giữ đúng tỉ lệ slide như PowerPoint */
+.presentation-container {
+    aspect-ratio: 16/9;
+    margin: 0 auto;
+}
+
+/* Tối ưu font cho màn hình lớn */
+@media (min-width: 1400px) {
+    .text-box h2 {
+        font-size: 4rem;
+    }
+
+    .text-box p {
+        font-size: 1.5rem;
+    }
 }
